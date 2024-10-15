@@ -3,7 +3,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+// マクロ系
+
+// ジェネリクス
+#define getfmt(x) \
+    _Generic(x, int: "%d", double: "%f", char: "%c", char*: "%s", int*: "%p")
+// 出力系
+
 #define dbglog(i, fmt) printf("%s is set: " fmt "\n", #i, i)
+
+#define dbgloga(i) printf("%s is set: ", #i), printf(getfmt(i), i), printf("\n")
 
 const int BUF_SIZE = 100;
 const int INPUT_BASE = 10;
