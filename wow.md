@@ -5,7 +5,9 @@ char str[] = "aa" "bb";
 は
 str == "aabb"である
 
-## dbglog関係
+## _Generic関係
+
+### dbglogへ
 
 - 単純にdbglog(i, getfmt(i))
   - _Genericが後で評価されるのか知らんけど無理だった
@@ -15,3 +17,7 @@ str == "aabb"である
   - printfを3つ使えば行ける
     - ;と何が違うのか
 - トークン連結演算子##であれこれ
+
+### inputsへ
+- そもそも可変長から取り出すときに、castするのでx
+- 単一入力なら代入したいので出る番なし

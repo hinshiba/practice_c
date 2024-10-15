@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+const int BUF_SIZE = 100;
+const int INPUT_BASE = 10;
+
 // マクロ系
 
 // ジェネリクス
@@ -14,17 +17,14 @@
 
 #define dbgloga(i) printf("%s is set: ", #i), printf(getfmt(i), i), printf("\n")
 
-const int BUF_SIZE = 100;
-const int INPUT_BASE = 10;
-
-void msgexit(const char msg[]) {
+[[noreturn]] void msgexit(const char msg[]) {
     printf("%s", msg);
     exit(1);
 }
 
 // fgetsヘルパ
 
-void input(const char dialog[], char buf[], const int buf_size) {
+void inputln(const char dialog[], char buf[], const int buf_size) {
     printf("%s", dialog);
     if (fgets(buf, buf_size, stdin) == NULL || buf[0] == '\n') {
         msgexit("not input");
@@ -56,13 +56,13 @@ double parse_double(char* str) {
 
 int input_int(char dialog[]) {
     char buf[BUF_SIZE];
-    input(dialog, buf, BUF_SIZE);
+    inputln(dialog, buf, BUF_SIZE);
     return parse_int(buf);
 }
 
 double input_double(char dialog[]) {
     char buf[BUF_SIZE];
-    input(dialog, buf, BUF_SIZE);
+    inputln(dialog, buf, BUF_SIZE);
     return parse_double(buf);
 }
 
@@ -72,7 +72,7 @@ void inputs(const char dialog[], const char fmt[], ...) {
     if (fmt == NULL) msgexit("fmt is null");
     if (strlen(fmt) < 2) msgexit("maybe not %%x");
     char buf[BUF_SIZE];
-    input(dialog, buf, BUF_SIZE);
+    inputln(dialog, buf, BUF_SIZE);
     // 入力を分割
     const char SPLIT[] = " ,";
     char* ctx;
