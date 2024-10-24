@@ -14,7 +14,7 @@
 				"-ansi",
 				"-pedantic",
 				"-Wall",
-				"-std=c11"
+				"-std=c2x"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
