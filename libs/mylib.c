@@ -3,39 +3,48 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
 const int BUF_SIZE = 100;
 const int INPUT_BASE = 10;
+*/
 
-// マクロ系
+/* C90で配列の長さが変数ではだめなので */
+#define BUF_SIZE 100
+#define INPUT_BASE 10
 
-// ジェネリクス
+/* マクロ系 */
+
+/* ジェネリクス */
 #define getfmt(x) \
     _Generic(x, int: "%d", double: "%f", char: "%c", char*: "%s", int*: "%p")
-// 出力系
+/* 出力系 */
 
 #define dbglog(i, fmt) printf("%s is set: " fmt "\n", #i, i)
 
 #define dbgloga(i) printf("%s is set: ", #i), printf(getfmt(i), i), printf("\n")
 
-[[noreturn]] void msgexit(const char msg[]) {
+/* [[noreturn]] */
+
+void msgexit(const char msg[]) {
     printf("%s", msg);
-    exit(1);
+    exit(EXIT_FAILURE);
 }
 
-// fgetsヘルパ
+/* fgetsヘルパ */
 
 void inputln(const char dialog[], char buf[], const int buf_size) {
+    size_t len;
     printf("%s", dialog);
     if (fgets(buf, buf_size, stdin) == NULL || buf[0] == '\n') {
         msgexit("not input");
     }
-    size_t len = strlen(buf);
+    len = strlen(buf);
     if (buf[len - 1] == '\n') {
         buf[len - 1] = '\0';
     }
 }
 
-// パーサー
+/* パーサー */
 
 int parse_int(char* str) {
     char* e;
@@ -52,7 +61,12 @@ double parse_double(char* str) {
     return d;
 }
 
-// 単数入力
+char parse_char(char* str) {
+    if (strlen(str) != 2) msgexit("parse error");
+    return str[0];
+}
+
+/* 単数入力 */
 
 int input_int(char dialog[]) {
     char buf[BUF_SIZE];
@@ -66,14 +80,19 @@ double input_double(char dialog[]) {
     return parse_double(buf);
 }
 
-// 複数入力関係
+char input_char(char dialog[]) {
+    char buf[BUF_SIZE];
+    inputln(dialog, buf, BUF_SIZE);
+    return parse_char(buf);
+}
+/* 複数入力関係 */
 
 void inputs(const char dialog[], const char fmt[], ...) {
     if (fmt == NULL) msgexit("fmt is null");
     if (strlen(fmt) < 2) msgexit("maybe not %%x");
     char buf[BUF_SIZE];
     inputln(dialog, buf, BUF_SIZE);
-    // 入力を分割
+    /* 入力を分割 */
     const char SPLIT[] = " ,";
     char* ctx;
     char* tkn = strtok_s(buf, SPLIT, &ctx);
