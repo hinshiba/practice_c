@@ -131,3 +131,11 @@ void inputs(const char dialog[], const char fmt[], ...) {
     }
     va_end(arg);
 }
+
+/* ターミナル関係 */
+
+void term_alloc(int line) {
+    size_t i;
+    for (i = 0; i < line; i++) printf("\n");
+    printf("\033[%dA", line);
+}
