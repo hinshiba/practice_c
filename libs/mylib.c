@@ -30,6 +30,13 @@ void msgexit(const char msg[]) {
     exit(EXIT_FAILURE);
 }
 
+/* my_strlen */
+size_t my_strlen(const char* str) {
+    const char* p = str;
+    while (*p) ++p;
+    return (size_t)(p - str);
+}
+
 /* fgetsヘルパ */
 
 void inputln(const char dialog[], char buf[], const int buf_size) {
