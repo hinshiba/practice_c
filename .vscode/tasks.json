@@ -13,8 +13,7 @@
 				"${fileDirname}\\${fileBasenameNoExtension}.exe",
 				"-ansi",
 				"-pedantic",
-				"-Wall",
-				// "-std=c2x"
+				"-Wall"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -27,6 +26,52 @@
 				"isDefault": true
 			},
 			"detail": "コンパイラ: C:\\Users\\haruh\\scoop\\apps\\gcc\\current\\bin\\gcc.exe"
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: gcc.exe アクティブなファイルのビルド",
+			"command": "C:/MinGW/bin/gcc.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-ansi",
+				"-pedantic",
+				"-Wall"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": false
+			},
+			"detail": "コンパイラ: C:/MinGW/bin/gcc.exe"
+		},
+		{
+			"type": "cppbuild",
+			"label": "C/C++: cl.exe アクティブなファイルのビルド",
+			"command": "cl.exe",
+			"args": [
+				"/Zi",
+				"/EHsc",
+				"/nologo",
+				"/Fe${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"${file}"
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$msCompile"
+			],
+			"group": "build",
+			"detail": "コンパイラ: cl.exe"
 		}
 	]
 }

@@ -1,8 +1,8 @@
+#include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 /*
 const int BUF_SIZE = 100;
 const int INPUT_BASE = 10;
@@ -11,6 +11,17 @@ const int INPUT_BASE = 10;
 /* C90で配列の長さが変数ではだめなので */
 #define BUF_SIZE 100
 #define INPUT_BASE 10
+
+/* プロトタイプ宣言 */
+
+void msgexit(const char msg[]);
+void inputln(const char dialog[], char buf[], const int buf_size);
+int parse_int(char* str);
+double parse_double(char* str);
+char parse_char(char* str);
+int input_int(char dialog[]);
+double input_double(char dialog[]);
+char input_char(char dialog[]);
 
 /* マクロ系 */
 
