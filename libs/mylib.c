@@ -24,6 +24,9 @@ double input_double(char dialog[]);
 char input_char(char dialog[]);
 
 /* マクロ系 */
+/* 仕様上マクロはそれ以降の行に影響することになっているので注意すること */
+
+#define SWAP(a, b) ((a != b) ? (a += b, b = a - b, a -= b) : 0)
 
 /* ジェネリクス */
 #define getfmt(x) \
@@ -39,6 +42,29 @@ char input_char(char dialog[]);
 void msgexit(const char msg[]) {
     printf("%s", msg);
     exit(EXIT_FAILURE);
+}
+
+/* 文字列操作系 */
+
+#define my_islower(c) 'a' <= c&& c <= 'z'
+#define my_isupper(c) 'A' <= c&& c <= 'Z'
+#define CASE_DIFF 32
+#define change_case(c) \
+    my_islower(c) ? c - CASE_DIFF : (my_isupper(c) ? c + CASE_DIFF : c)
+
+/*
+int my_islower(char c) { return 'a' <= c && c <= 'z'; }
+int my_isupper(char c) { return 'A' <= c && c <= 'Z'; }
+char change_case(char c) {
+    c = my_islower(c) ? c - CASE_DIFF : (my_isupper(c) ? c + CASE_DIFF : c);
+}
+*/
+
+/* my_strlen */
+size_t my_strlen(const char* str) {
+    const char* p = str;
+    while (*p) ++p;
+    return (size_t)(p - str);
 }
 
 /* fgetsヘルパ */
